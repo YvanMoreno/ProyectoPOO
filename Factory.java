@@ -22,66 +22,67 @@ public class Factory {
         Cochera registros=new Cochera();
 
 
-        while (dato==1){
-            Scanner INFO = new Scanner(System.in);
+        while (dato==1) {
+            try {
+                Scanner INFO = new Scanner(System.in);
 
-            if (proceso==1){
+                if (proceso == 1) {
 
-                System.out.println("Ingrese la fecha de atención : ");
-                fecha = INFO.nextLine();
+                    System.out.println("Ingrese la fecha de atención : ");
+                    fecha = INFO.nextLine();
 
-                System.out.println("Ingrese la placa: ");
-                placa= INFO.nextLine();
+                    System.out.println("Ingrese la placa: ");
+                    placa = INFO.nextLine();
 
-                System.out.println("Ingrese el modelo:");
-                modelo= INFO.nextLine();
+                    System.out.println("Ingrese el modelo:");
+                    modelo = INFO.nextLine();
 
-                System.out.println("Ingrese el estado: (1) PAGADO (0) POR PAGAR ");
-                estado= INFO.nextInt();
+                    System.out.println("Ingrese el estado: (1) PAGADO (0) POR PAGAR ");
+                    estado = INFO.nextInt();
+                    if (estado != 1 || estado != 0) throw new Exception("Estado ingresado incorrecto");
 
-                System.out.println("Ingrese el tipo de servicio:  (1) DIA (2)NOCHE (3)MENSUAL (4)SALIR");
-                tipoServicio= INFO.nextInt();
-
-
-
-
-                if (tipoServicio == 1) {
-                    System.out.println("Ingrese el tiempo en horas: ");
-                    tiempo= INFO.nextDouble();
-                    Dia nuevo1=new Dia(fecha,placa,modelo,estado,tiempo);
-                    System.out.println("El precio a cancelar es:"+nuevo1.Calcularprecio());
-                    registros.registrar(nuevo1);
+                    System.out.println("Ingrese el tipo de servicio:  (1) DIA (2)NOCHE (3)MENSUAL (4)SALIR");
+                    tipoServicio = INFO.nextInt();
 
 
+                    if (tipoServicio == 1) {
+                        System.out.println("Ingrese el tiempo en horas: ");
+                        tiempo = INFO.nextDouble();
+                        Dia nuevo1 = new Dia(fecha, placa, modelo, estado, tiempo);
+                        System.out.println("El precio a cancelar es:" + nuevo1.Calcularprecio());
+                        registros.registrar(nuevo1);
+
+
+                    } else if (tipoServicio == 2) {
+                        Noche nuevo2 = new Noche(fecha, placa, modelo, estado);
+                        System.out.println("El precio a cancelar es:" + nuevo2.Calcularprecio());
+                        registros.registrar(nuevo2);
+                    } else if (tipoServicio == 3) {
+                        System.out.println("Ingrese el mes: ");
+                        mes = INFO.nextLine();
+                        mensual nuevo3 = new mensual(fecha, placa, modelo, estado, mes);
+                        System.out.println("El precio a cancelar es:" + nuevo3.Calcularprecio());
+                        registros.registrar(nuevo3);
+                    }
+                    registros.listar();
+                    //System.out.println("Desea continuar : (1) Si/ (2) NO");
+                    //dato = datos.nextInt();
+                    break;
+
+
+                } else if (proceso == 2) {
+                    System.out.println("SALIENDO...");
+                    break;
                 }
-
-                else if (tipoServicio == 2) {
-                    Noche nuevo2=new Noche(fecha,placa,modelo,estado);
-                    System.out.println("El precio a cancelar es:"+nuevo2.Calcularprecio());
-                    registros.registrar(nuevo2);
-                }
-
-                else if (tipoServicio == 3) {
-                    System.out.println("Ingrese el mes: ");
-                    mes= INFO.nextLine();
-                    mensual nuevo3=new mensual(fecha,placa,modelo,estado,mes);
-                    System.out.println("El precio a cancelar es:"+nuevo3.Calcularprecio());
-                    registros.registrar(nuevo3);
-                }
-                registros.listar();
-                System.out.println("Desea continuar : (1) Si/ (2) NO");
-                dato = datos.nextInt();
-
 
             }
+            catch(Exception e){
 
-
-            else if (proceso==2){
-                System.out.println("SALIENDO...");
+                System.out.println(e.getMessage());
                 break;
             }
-
         }
+
 
 
         return null;
