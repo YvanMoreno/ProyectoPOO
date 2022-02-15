@@ -39,7 +39,7 @@ public class Factory {
 
                     System.out.println("Ingrese el estado: (1) PAGADO (0) POR PAGAR ");
                     estado = INFO.nextInt();
-                    if (estado != 1 || estado != 0) throw new Exception("Estado ingresado incorrecto");
+                    if (estado != 1 & estado != 0) throw new Exception("Estado ingresado incorrecto");
 
                     System.out.println("Ingrese el tipo de servicio:  (1) DIA (2)NOCHE (3)MENSUAL (4)SALIR");
                     tipoServicio = INFO.nextInt();
@@ -65,9 +65,8 @@ public class Factory {
                         registros.registrar(nuevo3);
                     }
                     registros.listar();
-                    //System.out.println("Desea continuar : (1) Si/ (2) NO");
-                    //dato = datos.nextInt();
-                    break;
+                    System.out.println("Desea continuar : (1) Si/ (2) NO");
+                    dato = datos.nextInt();
 
 
                 } else if (proceso == 2) {
